@@ -1,12 +1,14 @@
 class Game {
   constructor() {
-
+    this.rollsIndex = [];
   }
   roll(pins) {
+    this.rollsIndex.push(pins);
+  };
 
-  }
-
-  score() {
-    return 0;
-  }
+  runningScore() {
+    return this.rollsIndex.reduce(
+      (accumulator, currentValue) => accumulator + currentValue
+    );
+  };
 }
