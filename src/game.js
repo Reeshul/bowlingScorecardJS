@@ -1,8 +1,10 @@
+"use-strict";
+
 class Game {
   constructor() {
     this.currentRollsArray = [];
     this.allRollsArray = [];
-    this.framesArray = [];
+    this.framesScoresArray = [];
   }
   roll(pins) {
     this.currentRollsArray.push(pins);
@@ -10,12 +12,8 @@ class Game {
     if (this.currentRollsArray.length === 2) {
       // push the entire array into the allRollsArray array
       this.allRollsArray.push(this.currentRollsArray);
-      // and then push the sum of the newly pushed array in the allRollsArray array in the frames array
-      this.framesArray.push(
-        this.currentRollsArray.reduce(
-          (accumulator, currentValue) => accumulator + currentValue
-        )
-      );
+      // and then push the sum of the newly pushed array in the allRollsArray array in the framesScoresArray
+      this.framesScoresArray.push(sumArray(this.currentRollsArray));
       // and then empty the currentRollsArray
       this.currentRollsArray = [];
     }
@@ -26,14 +24,14 @@ class Game {
     if (this.currentRollsArray[0]) {
       // return the sum of the frame scores plus the pins in the last roll
       return (
-        this.framesArray.reduce(
+        this.framesScoresArray.reduce(
           (accumulator, currentValue) => accumulator + currentValue
         ) + this.currentRollsArray[0]
       );
-    // otherwise if we've completed a frame
+      // otherwise if we've completed a frame
     } else {
       // return the sum of the frame scores
-      return this.framesArray.reduce(
+      return this.framesScoresArray.reduce(
         (accumulator, currentValue) => accumulator + currentValue
       );
     }

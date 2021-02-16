@@ -47,7 +47,7 @@ describe("score", () => {
   it("the first item in the frames array is a 9 after rolling a 4 and then a 5", () => {
     game.roll(4);
     game.roll(5);
-    expect(game.framesArray).toEqual([9]);
+    expect(game.framesScoresArray).toEqual([9]);
   });
 
   it("the first subarray in the allRollsArray is [4,5] after rolling a 4 and then a 5", () => {
@@ -71,11 +71,18 @@ describe("score", () => {
     expect(game.runningScore()).toBe(15);
   });
 
-  it("outputs a score of 25 after rolling 8, 8, 5, 3", () => {
+  it("outputs a score of 17 after rolling 8, 1, 5, 3", () => {
     game.roll(8);
-    game.roll(8);
+    game.roll(1);
     game.roll(5);
     game.roll(3);
-    expect(game.runningScore()).toBe(24);
+    expect(game.runningScore()).toBe(17);
+  });
+  it("the second item in the frames array is 19 after rolling 8, 1, 5, 3", () => {
+    game.roll(8);
+    game.roll(1);
+    game.roll(5);
+    game.roll(3);
+    expect(game.framesScoresArray.map(cumulativeSum)).toEqual([9,17]);
   });
 });
